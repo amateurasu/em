@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: test
+    include:
+      - db
+
+  servlet:
+    multipart:
+      max-file-size: 128KB
+      max-request-size: 128KB
+
+  datasource:
+    hikari:
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+
+server:
+  snmp:
+    trap-pool-size: 10
+
+  port: 8087
+  servlet:
+    context-path: /em
+  tomcat:
+    accept-count: 250
+    max-connections: 20000
+    threads:
+      max: 300
+      min-spare: 100
+
+  compression:
+    # Enable response compression
+    enabled: true
+    # The comma-separated list of mime types that should be compressed
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    # Compress the response only if the response size is at least 1KB
+    min-response-size: 1024
