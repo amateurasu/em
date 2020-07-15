@@ -1,6 +1,9 @@
-// repositories {
-//     maven { url = uri("http://172.16.31.95:8081//repository/maven/") }
-// }
+fun nexus(ip: String) = uri("http://$ip:8081/repository/maven/")
+
+repositories {
+    // maven { url = nexus("172.16.31.95") }
+    maven { url = nexus("localhost") }
+}
 
 plugins {
     java
@@ -11,31 +14,25 @@ plugins {
 group = "com.viettel.ems"
 version = "1.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
-dependencies {
-    //region LOMBOK
-    val lombokV = "org.projectlombok:lombok:1.18.12"
-    compileOnly(lombokV)
-    annotationProcessor(lombokV)
-    testCompileOnly(lombokV)
-    testAnnotationProcessor(lombokV)
-    //endregion
+subprojects {
+    apply(plugin = "java")
+    apply(plugin = "application")
 
-    val springBoot = "org.springframework.boot:spring-boot"
-    val springBootV = "2.3.1.RELEASE"
+    repositories {
+        // maven { url = nexus("172.16.31.95") }
+        maven { url = nexus("localhost") }
+    }
 
-    implementation("$springBoot-starter:$springBootV")
-    implementation("$springBoot-starter-web:$springBootV")
-    implementation("$springBoot-starter-webflux:$springBootV")
-    implementation("$springBoot-starter-jdbc:$springBootV")
-    implementation("$springBoot-starter-data-jpa:$springBootV")
-
-    implementation("org.snmp4j:snmp4j:3.4.1")
-    implementation("org.snmp4j:snmp4j-agent:3.3.4")
-
-    implementation("mysql:mysql-connector-java:8.0.19")
+    dependencies {
+        val lombokV = "org.projectlombok:lombok:1.18.12"
+        compileOnly(lombokV)
+        annotationProcessor(lombokV)
+        testCompileOnly(lombokV)
+        testAnnotationProcessor(lombokV)
+    }
 }
-

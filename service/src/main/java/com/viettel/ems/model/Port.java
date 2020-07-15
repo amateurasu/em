@@ -1,5 +1,6 @@
 package com.viettel.ems.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,8 +10,9 @@ import java.util.stream.Collectors;
 
 @Data
 @Entity
-@Table(name = "onu")
-public class ONU {
+@Table(name = "olt_pon_port")
+public class Port {
+
     @Id
     @GeneratedValue
     private long id;
@@ -18,33 +20,22 @@ public class ONU {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @Column
-    @Enumerated
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false, length = 50)
     private Status status;
 
-    @Column(name = "pon_onu_id")
-    private String ponOnuId;
-
     @ManyToOne
-    @JoinColumn(name = "us_splitter_id", referencedColumnName = "id")
-    private Splitter splitter;
-
-    @ManyToOne
-    @JoinColumn(name = "us_olt_pon_port_id", referencedColumnName = "id")
-    private Port ponPort;
-
-    // @Column(name = "onu_profile_id")
-    // private long onuProfileId;
+    @JoinColumn(name = "olt_slot_id", referencedColumnName = "id")
+    private Slot slot;
 
     @SuppressWarnings("unused")
     enum Status {
-        UNKNOWN(-1),
-        INVALID(0),
+        NOT_READY(0),
         INACTIVE(1),
-        ACTIVE_PENDING(2),
-        ACTIVE(3),
+        ACTIVE(2),
+        ACTIVATE_PENDING(3),
         DEACTIVATE_PENDING(4),
-        DISABLE_PENDING(5),
+        SWITCH_OVER_PENDING(5),
         DISABLE(6);
 
         int code;
@@ -60,7 +51,9 @@ public class ONU {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(Status.fromCode(1));
-    }
+    // @Column(name = "layout_x")
+    // private double layoutX;
+
+    // @Column(name = "layout_y")
+    // private double layoutY;
 }

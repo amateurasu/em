@@ -55,12 +55,13 @@ public class TrapReceiver implements CommandResponder, CommandLineRunner {
             : new DefaultTcpTransportMapping((TcpAddress) listenAddress);
 
         //V3 SECURITY
-        SecurityProtocols protocols = SecurityProtocols.getInstance().addDefaultProtocols();
+        var securityProtocols = SecurityProtocols.getInstance();
+        SecurityProtocols protocols = securityProtocols.addDefaultProtocols();
         USM usm = new USM(protocols, new OctetString(MPv3.createLocalEngineID()), 0);
 
-        SecurityProtocols.getInstance().addPrivacyProtocol(new PrivAES192());
-        SecurityProtocols.getInstance().addPrivacyProtocol(new PrivAES256());
-        SecurityProtocols.getInstance().addPrivacyProtocol(new Priv3DES());
+        securityProtocols.addPrivacyProtocol(new PrivAES192());
+        securityProtocols.addPrivacyProtocol(new PrivAES256());
+        securityProtocols.addPrivacyProtocol(new Priv3DES());
 
         usm.setEngineDiscoveryEnabled(true);
         SecurityModels.getInstance().addSecurityModel(usm);

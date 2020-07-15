@@ -1,5 +1,6 @@
 CREATE TABLE olt (
     id     INT AUTO_INCREMENT PRIMARY KEY,
+    ip     VARCHAR(15) UNIQUE NOT NULL,
     name   VARCHAR(50) NOT NULL,
     status VARCHAR(50) NOT NULL
 );

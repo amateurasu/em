@@ -19,12 +19,13 @@ public class OLT {
     private String name;
 
     @Column
+    private String ip;
+
+    @Column
     private Status status;
 
     enum Status {
-        UNKNOWN(0),
-        ON(1),
-        OFF(2);
+        UNKNOWN(0), ON(1), OFF(2);
 
         int code;
 

@@ -6,10 +6,12 @@
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="C:/Tools/gradle/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.12/48e4e5d60309ebd833bc528dcf77668eab3cd72c/lombok-1.18.12.jar" />
+          <entry name="$PROJECT_DIR$/../../../Tools/Gradle/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.12/48e4e5d60309ebd833bc528dcf77668eab3cd72c/lombok-1.18.12.jar" />
         </processorPath>
-        <module name="em.test" />
-        <module name="em.main" />
+        <module name="em.service.main" />
+        <module name="em.emulator.test" />
+        <module name="em.emulator.main" />
+        <module name="em.service.test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />
